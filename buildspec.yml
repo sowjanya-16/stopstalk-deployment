@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+    commands:
+      - apt-get update
+      - apt-get install -y jq
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
+      - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
+      - export PATH=$PATH:./sonar-scanner-3.3.0.1492-linux/bin/
+  pre_build:
+    commands:
+      - sonar-scanner -Dsonar.organization=sonarkey1s -Dsonar.projectKey=sonarkey1proj  -Dsonar.sources=src -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=69b92ad2e6c1cb9818d5cd795bae026e4d035e2d
+      - sleep 5
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=sonarkey1proj  > analysis.json
+      - cat analysis.json
+  build:
+    commands:
+      - echo Building Project
+      - echo Finished Building
+
+cache:
+  paths:
+    - "node_modules/**/*"
