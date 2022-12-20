@@ -12,7 +12,7 @@ phases:
       - export PATH=$PATH:./sonar-scanner-3.3.0.1492-linux/bin/
   pre_build:
     commands:
-      - sonar-scanner -Dsonar.organization=sonarkey1s -Dsonar.projectKey=sonarkey1proj -Dsonar.sources=src -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=67a6e6a4e9243224d850ed19d8d5188e11744540
+      - sonar-scanner -D"sonar.organization=sonarkey1s" -D"sonar.projectKey=sonarkey1proj" -D"sonar.sources=." -D"sonar.host.url=https://sonarcloud.io" -D"sonar.login=67a6e6a4e9243224d850ed19d8d5188e11744540"
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=sonarkey1proj  > analysis.json
       - cat analysis.json
