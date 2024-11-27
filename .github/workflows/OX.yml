@@ -11,6 +11,8 @@ jobs:
   security:
     runs-on: ubuntu-latest
     steps:
+      - name: Disable SSL validation (not recommended)
+        run: echo "NODE_TLS_REJECT_UNAUTHORIZED=0" >> $GITHUB_ENV
       - name: Run OX Security Scan to check for vulnerabilities
         with:
           ox_host_url: https://app.bosch.onprem3.dev.ox.security
