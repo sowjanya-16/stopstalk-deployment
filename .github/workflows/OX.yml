@@ -13,5 +13,6 @@ jobs:
     steps:
       - name: Run OX Security Scan to check for vulnerabilities
         with:
+          ox_host_url: https://app.bosch.onprem3.dev.ox.security
           ox_api_key: ${{ secrets.OX_API_KEY }}
         uses: oxsecurity/ox-security-scan@main
