@@ -2,11 +2,11 @@ name: Example workflow with OX Security Scan
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     types: [main, opened, reopened, synchronize]
     branches:
-      - main
+      - master
 jobs:
   security:
     runs-on: ubuntu-latest
