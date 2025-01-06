@@ -15,4 +15,4 @@ jobs:
         with:
           ox_host_url: https://app.ox.security/
           ox_api_key: ${{ secrets.OX_API_KEY }}
-        uses: oxsecurity/ox-security-scan@main
+        uses: oxsecurity/ox-security-scan@master
