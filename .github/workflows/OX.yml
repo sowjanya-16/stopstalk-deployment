@@ -13,6 +13,7 @@ jobs:
     steps:
       - name: Run OX Security Scan to check for vulnerabilities
         with:
-          ox_host_url: https://app.ox.security/
+          ox_host_url: https://app.asoc-dev.bosch.com/
           ox_api_key: ${{ secrets.OX_API_KEY }}
+          ox_disable_ssl_validation: ${{ secrets.OX_DISABLE_SSL_VALIDATION }}
         uses: oxsecurity/ox-security-scan@main
