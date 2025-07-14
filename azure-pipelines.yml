@@ -7,13 +7,26 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  name: Default
+  demands:
+    -agent.name -equals myagent
+variables:
+  - group: "ASOC"
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+  - stage: OX_Security_Scan
+    displayName: OX Security Scan
+    jobs:
+      - job: OX
+        displayName: Run OX Security Scan
+        steps:
+          - script: |
+              docker run \
+              -e OX_HOST_URL=$(ASOC_HOST) \
+              -e OX_API_KEY=$(ASOC_TOKEN) \
+              -e OX_DISABLE_SSL_VALIDATION=true \
+              --env-file <(env | grep 'SYSTEM_\|BUILD_') \
+              oxsecurity/ox-block-mode:latest
+            displayName: Execute OX Security Scan
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+
